@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+APP_ENV=test nosetests \
+    --with-coverage \
+    --cover-package=chronos \
+    --cover-tests \
+    --cover-inclusive \
+    --cover-erase
+
+rm .coverage

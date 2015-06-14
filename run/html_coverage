@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+APP_ENV=test nosetests \
+    --with-coverage \
+    --cover-package=chronos \
+    --cover-tests \
+    --cover-inclusive \
+    --cover-erase \
+    --cover-html \
+    --cover-html-dir=/tmp/coverage_html/
+
+exo-open /tmp/coverage_html/index.html
+rm .coverage
