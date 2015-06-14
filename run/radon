@@ -1,0 +1,3 @@
+#!/bin/bash
+radon cc --min B --show-complexity .
+radon mi --min B --show .
