@@ -1,4 +1,5 @@
 import bcrypt
+import re
 
 from chronos.data.database import database
 from chronos.data.entities import User
@@ -20,6 +21,8 @@ class RegisterUserFeature(object):
         return user
 
     def validate_data(self, email, password):
+        if not self.email_valid(email):
+            raise self.InvalidEmail
         if self.email_taken(email):
             raise self.EmailTaken
         if not password:
@@ -28,6 +31,10 @@ class RegisterUserFeature(object):
     def hash_password(self, password):
         hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
         return hashed.decode('utf-8')
+
+    def email_valid(self, email):
+        pattern = '^[^@]+@[^@]+\.[^@]+$'
+        return bool(re.match(pattern, email))
 
     def email_taken(self, email):
         query = database.query(User).filter(User.email == email).limit(1)

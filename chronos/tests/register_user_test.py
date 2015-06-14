@@ -31,6 +31,10 @@ class RegisterUserTest(TestCase):
         with self.assertRaises(RegisterUserFeature.EmailTaken):
             self.register_foobar()
 
+    def test_cannot_register_invalid_email(self):
+        with self.assertRaises(RegisterUserFeature.InvalidEmail):
+            self.feature.register_user('foobar', '123456')
+
     def test_cannot_register_empty_password(self):
         with self.assertRaises(RegisterUserFeature.EmptyPassword):
             self.feature.register_user('foo@bar.com', '')
