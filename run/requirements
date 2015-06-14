@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo requirements/debian.sh
+pip install -r requirements/dev.txt
