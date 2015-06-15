@@ -17,7 +17,6 @@ class RegisterUserFeature(object):
         type = User.ADMIN if not self.there_are_users() else User.EMPLOYEE
         user = User(email=email, password=hashed_password, type=type)
         database.add(user)
-        database.commit()
         return user
 
     def validate_data(self, email, password):

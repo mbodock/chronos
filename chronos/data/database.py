@@ -5,12 +5,12 @@ from chronos.config import config
 from .entities import Entity
 
 
-engine = create_engine(config.database)
+engine = create_engine(config.database, isolation_level='SERIALIZABLE')
 
 if config.create_schema:
     Entity.metadata.create_all(engine)
 
-Session = sessionmaker()
+Session = sessionmaker(autocommit=True)
 Session.configure(bind=engine)
 
 database = Session()

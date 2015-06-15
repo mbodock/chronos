@@ -11,12 +11,7 @@ class RegisterUserTest(TestCase):
         self.feature = RegisterUserFeature()
 
     def tearDown(self):
-        self.clean_database()
-
-    def clean_database(self):
-        database.rollback()
         database.query(User).delete()
-        database.commit()
 
     def register_foobar(self):
         return self.feature.register_user('foo@bar.com', '123456')
