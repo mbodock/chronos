@@ -5,7 +5,7 @@ from chronos.data.database import database
 from chronos.data.entities import User
 
 
-class RegisterUserTest(TestCase):
+class RegisterUserFeatureTest(TestCase):
 
     def setUp(self):
         self.feature = RegisterUserFeature()
