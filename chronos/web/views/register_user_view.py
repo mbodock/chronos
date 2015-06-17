@@ -13,7 +13,7 @@ class RegisterUserView(View):
         form = RegisterUserForm(request.form)
         if not form.is_valid():
             form.persist()
-            return redirect('/')
+            return redirect('/register')
         form.register_user()
         self.success_message('You are registered and ready for login!')
-        return redirect('/')
+        return redirect('/register')

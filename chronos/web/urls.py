@@ -1,4 +1,4 @@
-from flask import send_from_directory
+from flask import send_from_directory, redirect
 from .app import app
 from .views.register_user_view import RegisterUserView
 
@@ -8,9 +8,13 @@ def get_static(path):
     return send_from_directory('static', path)
 
 @app.route('/')
+def get_root():
+    return redirect('/register')
+
+@app.route('/register')
 def get_register_user():
     return RegisterUserView().get()
 
-@app.route('/', methods=['POST'])
+@app.route('/register', methods=['POST'])
 def post_register_user():
     return RegisterUserView().post()
