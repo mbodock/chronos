@@ -13,7 +13,7 @@ class RegisterUserForm(Form):
     def validate_email(self):
         feature = RegisterUserFeature()
         if not self.data.get('email'):
-            self.set_error('email', 'Required field')
+            self.set_error('email', 'Required')
         elif not feature.email_valid(self.data.get('email')):
             self.set_error('email', 'Invalid email address')
         elif feature.email_taken(self.data.get('email')):
@@ -21,11 +21,11 @@ class RegisterUserForm(Form):
 
     def validate_passwords(self):
         if not self.data.get('password1'):
-            self.set_error('password1', 'Required field')
+            self.set_error('password1', 'Required')
         if not self.data.get('password2'):
-            self.set_error('password2', 'Required field')
+            self.set_error('password2', 'Required')
         if self.data.get('password1') != self.data.get('password2'):
-            self.set_error('password2', 'Confirmation does not match')
+            self.set_error('password2', 'Passwords don\'t match')
 
     def register_user(self):
         feature = RegisterUserFeature()
