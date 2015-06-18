@@ -11,15 +11,16 @@ class LoginFeature(object):
     class InvalidPassword(Exception): pass
 
     def login(self, email, password):
-        user = self.get_user_by_email(email)
-        self.validate_credentials(user, password)
+        user = self.validate_credentials(email, password)
         return self.create_session(user)
 
-    def validate_credentials(self, user, password):
+    def validate_credentials(self, email, password):
+        user = self.get_user_by_email(email)
         if not user:
             raise self.UserDoesNotExist
         if not self.password_match(user, password):
             raise self.InvalidPassword
+        return user
 
     def get_user_by_email(self, email):
         return database.query(User).filter(User.email == email).first()
