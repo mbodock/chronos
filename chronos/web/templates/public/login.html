@@ -1,0 +1,30 @@
+{% extends 'public/public_base.html' %}
+{% block container %}
+
+    <h2>Login</h2>
+    <hr>
+    {% if form.errors.global %}
+        <div class="alert alert-danger">{{ form.errors.global }}</div>
+    {% endif %}
+    <form action="" method="post">
+        <div class="form-group">
+            <input class="form-control" name="email" type="text" value="{{ form.data.email }}" placeholder="Email" autofocus>
+            <div class="help-block">
+                {% if form.errors.email %}
+                    <p class="text-danger">{{ form.errors.email }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" type="password" value="{{ form.data.password }}" placeholder="Password">
+            <div class="help-block">
+                {% if form.errors.password %}
+                    <p class="text-danger">{{ form.errors.password }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <a href="/register" class="btn btn-link">Sign in</a>
+    </form>
+
+{% endblock %}
