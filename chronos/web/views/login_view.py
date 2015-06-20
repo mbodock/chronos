@@ -20,4 +20,5 @@ class LoginView(View):
 
     def logout(self):
         LoginFeature().logout(session.get('session_token'))
+        session.pop('session_token')
         return redirect('/login')
