@@ -1,3 +1,4 @@
+from flask import session
 from .form import Form
 from chronos.features.login_feature import LoginFeature
 
@@ -28,7 +29,7 @@ class LoginForm(Form):
 
     def login(self):
         feature = LoginFeature()
-        feature.login(
+        session['session_token'] = feature.login(
             email=self.data.get('email'),
             password=self.data.get('password')
         )
