@@ -1,0 +1,3 @@
+#!/bin/bash
+source `which virtualenvwrapper.sh`
+mkvirtualenv -a . -p /usr/bin/python3 chronos
