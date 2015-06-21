@@ -1,6 +1,5 @@
 from .user_test import UserTest
 from chronos.features.clock_feature import ClockFeature
-from chronos.data.database import database
 from chronos.data.entities import Clock
 
 

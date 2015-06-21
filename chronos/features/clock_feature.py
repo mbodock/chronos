@@ -1,6 +1,4 @@
 from datetime import datetime
-
-from chronos.data.database import database
 from chronos.data.entities import Clock
 
 

@@ -1,4 +1,4 @@
-from flask import request, redirect, session, url_for
+from flask import request, redirect, session
 from chronos.features.login_feature import LoginFeature
 
 

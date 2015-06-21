@@ -1,4 +1,4 @@
-from flask import flash, get_flashed_messages
+from flask import flash
 
 
 class View(object):
