@@ -1,37 +1,31 @@
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, BigInteger, String, ForeignKey, DateTime
+from peewee import CharField, ForeignKeyField, DateTimeField
 
-
-Entity = declarative_base()
+from chronos.data.database import Entity, database
+from chronos.config import config
 
 
 class User(Entity):
 
-    __tablename__ = 'users'
-
     ADMIN = 'admin'
     EMPLOYEE = 'employee'
 
-    id = Column(BigInteger, primary_key=True)
-    email = Column(String(256), nullable=False, unique=True)
-    password = Column(String(60), nullable=False)
-    type = Column(String(10), nullable=False)
+    email = CharField(256, unique=True)
+    password = CharField(60)
+    type = CharField(10)
 
 
 class Session(Entity):
 
-    __tablename__ = 'sessions'
-
-    id = Column(BigInteger, primary_key=True)
-    user_id = Column(ForeignKey('users.id'), nullable=False)
-    token = Column(String(36), nullable=False, unique=True)
+    user = ForeignKeyField(User, related_name='sessions')
+    token = CharField(36, unique=True)
 
 
 class Clock(Entity):
 
-    __tablename__ = 'clocks'
+    user = ForeignKeyField(User, related_name='clocks')
+    start = DateTimeField()
+    stop = DateTimeField(null=True)
 
-    id = Column(BigInteger, primary_key=True)
-    user_id = Column(ForeignKey('users.id'), nullable=False)
-    start = Column(DateTime, nullable=False)
-    stop = Column(DateTime)
+
+if config.database.get('create_schema'):
+    database.create_tables([User, Session, Clock], safe=True)

@@ -1,4 +1,7 @@
 from .base import *
 
-database = 'postgresql://postgres@/chronos'
-create_schema = True
+database = {
+    'driver': 'sqlite',
+    'dbname': 'database.sqlite',
+    'create_schema': True,
+}

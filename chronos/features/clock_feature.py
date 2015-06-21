@@ -10,19 +10,19 @@ class ClockFeature(object):
     class UnstartedClock(Exception): pass
 
     def start_clock(self, user):
-        if self.get_open_clock_from_user(user):
+        if self.user_has_open_clock(user):
             raise self.ClockAlreadyStarted
-        clock = Clock(user_id=user.id, start=datetime.now())
-        database.add(clock)
+        return Clock.create(user=user, start=datetime.now())
 
     def stop_clock(self, user):
         clock = self.get_open_clock_from_user(user)
         if not clock:
             raise self.UnstartedClock
         clock.stop = datetime.now()
+        clock.save()
 
-    def get_clocks_from_user(self, user):
-        return database.query(Clock).order_by(Clock.id)
+    def user_has_open_clock(self, user):
+        return Clock.select().where(Clock.stop == None).exists()
 
     def get_open_clock_from_user(self, user):
-        return database.query(Clock).filter(Clock.stop == None).first()
+        return Clock.select().where(Clock.stop == None).first()

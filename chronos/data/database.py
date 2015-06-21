@@ -1,16 +1,12 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
+from peewee import SqliteDatabase, Model
 from chronos.config import config
-from .entities import Entity
 
 
-engine = create_engine(config.database, isolation_level='SERIALIZABLE')
+if config.database.get('driver') == 'sqlite':
+    database = SqliteDatabase(config.database.get('dbname'))
 
-if config.create_schema:
-    Entity.metadata.create_all(engine)
 
-Session = sessionmaker(autocommit=True)
-Session.configure(bind=engine)
+class Entity(Model):
 
-database = Session()
+    class Meta:
+        database = database

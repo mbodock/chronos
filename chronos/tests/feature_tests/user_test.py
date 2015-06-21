@@ -1,6 +1,5 @@
 from chronos.tests.test import Test
 from chronos.features.register_user_feature import RegisterUserFeature
-from chronos.data.database import database
 from chronos.data.entities import User
 
 
@@ -16,4 +15,4 @@ class UserTest(Test):
     @classmethod
     def tearDownClass(self):
         super(UserTest, self).tearDownClass()
-        database.query(User).delete()
+        User.delete().execute()

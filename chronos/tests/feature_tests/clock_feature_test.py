@@ -10,18 +10,18 @@ class ClockFeatureTest(UserTest):
         self.clock = ClockFeature()
 
     def tearDown(self):
-        database.query(Clock).delete()
+        Clock.delete().execute()
 
     def test_start_clock(self):
         self.clock.start_clock(self.employee)
-        clocks = self.clock.get_clocks_from_user(self.employee)
+        clocks = self.employee.clocks
         self.assertEqual(clocks.count(), 1)
-        self.assertIsNone(clocks.one().stop)
+        self.assertIsNone(clocks.first().stop)
 
     def test_stop_clock(self):
         self.clock.start_clock(self.employee)
         self.clock.stop_clock(self.employee)
-        clock = self.clock.get_clocks_from_user(self.employee).one()
+        clock = self.employee.clocks.first()
         self.assertIsNotNone(clock.stop)
 
     def test_cannot_stop_clock_if_not_started(self):

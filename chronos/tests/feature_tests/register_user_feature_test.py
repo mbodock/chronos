@@ -1,7 +1,6 @@
 from chronos.tests.test import Test
 
 from chronos.features.register_user_feature import RegisterUserFeature
-from chronos.data.database import database
 from chronos.data.entities import User
 
 
@@ -11,7 +10,7 @@ class RegisterUserFeatureTest(Test):
         self.feature = RegisterUserFeature()
 
     def tearDown(self):
-        database.query(User).delete()
+        User.delete().execute()
 
     def register_foobar(self):
         return self.feature.register_user('foo@bar.com', '123456')

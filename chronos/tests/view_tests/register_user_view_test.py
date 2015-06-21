@@ -2,7 +2,6 @@ from chronos.tests.test import Test
 
 from chronos.web.app import app
 from chronos.features.register_user_feature import RegisterUserFeature
-from chronos.data.database import database
 from chronos.data.entities import User
 
 
@@ -12,7 +11,7 @@ class RegisterUserViewTest(Test):
         self.client = app.test_client()
 
     def tearDown(self):
-        database.query(User).delete()
+        User.delete().execute()
 
     def test_register_page_is_accessible(self):
         response = self.client.get('/register')
