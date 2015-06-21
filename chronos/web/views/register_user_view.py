@@ -16,4 +16,4 @@ class RegisterUserView(View):
             return redirect('/register')
         form.register_user()
         self.success_message('You are registered and ready for login!')
-        return redirect('/register')
+        return redirect('/login')
