@@ -1,3 +1,0 @@
-#!/bin/bash
-dropdb -U postgres chronos
-createdb -U postgres chronos

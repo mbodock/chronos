@@ -1,3 +1,0 @@
-#!/bin/bash
-dropdb -U postgres chronos_test
-createdb -U postgres chronos_test
