@@ -1,0 +1,10 @@
+{% extends 'main.html' %}
+{% block body %}
+
+    {% include 'dashboard/_navbar.html' %}
+
+    <div class="container" style="margin-top:80px">
+        {% block container %}{% endblock %}
+    </div>
+
+{% endblock %}

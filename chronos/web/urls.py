@@ -1,18 +1,9 @@
-from flask import send_from_directory, redirect
+from flask import redirect
 from .app import app
 
-from .views.before_request_view import BeforeRequestView
 from .views.login_view import LoginView
 from .views.register_user_view import RegisterUserView
-
-
-@app.before_request
-def before_request():
-    return BeforeRequestView().get()
-
-@app.route('/static/<path:path>')
-def get_static(path):
-    return send_from_directory('static', path)
+from .views.clock_view import ClockView
 
 
 @app.route('/')
@@ -39,6 +30,14 @@ def get_register_user():
 def post_register_user():
     return RegisterUserView().post()
 
-@app.route('/dashboard')
-def get_dashboard():
-    return 'Dashboard >> <a href="/logout">Logout</a>'
+@app.route('/clock')
+def get_clock():
+    return ClockView().get()
+
+@app.route('/clock/start', methods=['POST'])
+def post_start_clock():
+    return ClockView().start_clock()
+
+@app.route('/clock/stop', methods=['POST'])
+def post_stop_clock():
+    return ClockView().stop_clock()

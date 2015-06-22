@@ -6,4 +6,5 @@ app = Flask(__name__)
 app.debug = config.flask.get('debug')
 app.secret_key = config.flask.get('secret_key')
 
+from .hooks import *
 from .urls import *

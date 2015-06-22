@@ -16,7 +16,7 @@ class LoginView(View):
             form.persist()
             return redirect('/login')
         form.login()
-        return redirect('/dashboard')
+        return redirect('/clock')
 
     def logout(self):
         LoginFeature().logout(session.get('session_token'))

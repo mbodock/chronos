@@ -17,7 +17,7 @@ class BeforeRequestView(object):
         if self.should_redirect_to_login():
             return redirect('/login')
         if self.should_redirect_to_dashboard():
-            return redirect('/dashboard')
+            return redirect('/clock')
 
     def should_redirect_to_login(self):
         login = LoginFeature()

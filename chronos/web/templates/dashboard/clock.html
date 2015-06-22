@@ -1,0 +1,42 @@
+{% extends 'dashboard/dashboard_base.html' %}
+{% block container %}
+
+    {% if not clock_is_open %}
+        {% set action = '/clock/start' %}
+        {% set btn_type = 'success' %}
+        {% set btn_text = 'Start Clock' %}
+    {% else %}
+        {% set action = '/clock/stop' %}
+        {% set btn_type = 'warning' %}
+        {% set btn_text = 'Stop Clock' %}
+    {% endif %}
+
+    <form action="{{ action }}" method="post" class="clock-buttons">
+        <div class="btn-group">
+            <button class="btn btn-{{ btn_type }} btn-lg">
+                <i class="glyphicon glyphicon-time"></i>
+            </button>
+            <button type="submit" class="btn btn-{{ btn_type }} btn-lg">
+                {{ btn_text }}
+            </button>
+        </div>
+    </form>
+
+    {% if clocks.exists() %}
+        <hr>
+        <h2>Clocks</h2>
+        <ul class="clocks">
+            {% for clock in clocks %}
+                <li>
+                    {{ clock.start.strftime('%Y-%m-%d %H:%M:%S') }} >
+                    {% if clock.stop %}
+                        {{ clock.stop.strftime('%H:%M:%S') }}
+                    {% else %}
+                        : :
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}
