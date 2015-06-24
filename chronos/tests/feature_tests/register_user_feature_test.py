@@ -49,3 +49,7 @@ class RegisterUserFeatureTest(Test):
         self.register_foobar()
         with self.assertRaises(RegisterUserFeature.EmailTaken):
             self.feature.register_user('FOO@BAR.COM', '123456')
+
+    def test_cannot_register_email_with_diacritics(self):
+        with self.assertRaises(RegisterUserFeature.InvalidEmail):
+            self.feature.register_user('fóo@bar.com', '123456')

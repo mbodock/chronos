@@ -30,7 +30,9 @@ class RegisterUserFeature(object):
         return hashed.decode('utf-8')
 
     def email_valid(self, email):
-        pattern = '^[^@]+@[^@]+\.[^@]+$'
+        local_chars = 'a-zA-Z0-9.+_-'
+        domain_chars = 'a-zA-Z0-9.-'
+        pattern = '^['+local_chars+']+@['+domain_chars+']+\.['+domain_chars+']+$'
         return bool(re.match(pattern, email))
 
     def email_taken(self, email):
