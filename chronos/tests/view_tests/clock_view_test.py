@@ -32,3 +32,12 @@ class ClockViewTest(UserTest):
         self.assertEqual(response.status_code, 302)
         clock = Clock.get()
         self.assertIsNotNone(clock.stop)
+
+    def test_starting_twice_results_in_redirect(self):
+        self.client.post('/clock/start')
+        response = self.client.post('/clock/start')
+        self.assertEqual(response.status_code, 302)
+
+    def test_stopping_unstarted_results_in_redirect(self):
+        response = self.client.post('/clock/stop')
+        self.assertEqual(response.status_code, 302)

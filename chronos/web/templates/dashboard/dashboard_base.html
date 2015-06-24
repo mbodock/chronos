@@ -2,8 +2,8 @@
 {% block body %}
 
     {% include 'dashboard/_navbar.html' %}
-
     <div class="container" style="margin-top:80px">
+        {% include '_messages.html' %}
         {% block container %}{% endblock %}
     </div>
 

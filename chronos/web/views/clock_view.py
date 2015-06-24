@@ -14,10 +14,16 @@ class ClockView(View):
 
     def start_clock(self):
         clock = ClockFeature(self.current_user)
-        clock.start_clock()
+        try:
+            clock.start_clock()
+        except ClockFeature.ClockAlreadyStarted:
+            self.error_message('Clock was already started')
         return redirect('/clock')
 
     def stop_clock(self):
         clock = ClockFeature(self.current_user)
-        clock.stop_clock()
+        try:
+            clock.stop_clock()
+        except ClockFeature.UnstartedClock:
+            self.error_message('Clock was not started')
         return redirect('/clock')

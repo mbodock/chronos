@@ -9,3 +9,6 @@ class View(object):
 
     def success_message(self, message):
         flash(message, 'success_message')
+
+    def error_message(self, message):
+        flash(message, 'error_message')
