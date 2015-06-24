@@ -44,3 +44,8 @@ class RegisterUserFeatureTest(Test):
         self.register_foobar()
         user = self.feature.register_user('bar@biz.com', '123456')
         assert user.type == User.EMPLOYEE
+
+    def test_cannot_register_taken_email_changing_case(self):
+        self.register_foobar()
+        with self.assertRaises(RegisterUserFeature.EmailTaken):
+            self.feature.register_user('FOO@BAR.COM', '123456')

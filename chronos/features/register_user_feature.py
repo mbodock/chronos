@@ -1,6 +1,7 @@
 import bcrypt
 import re
 
+from peewee import fn
 from chronos.data.entities import User
 
 
@@ -33,7 +34,7 @@ class RegisterUserFeature(object):
         return bool(re.match(pattern, email))
 
     def email_taken(self, email):
-        return User.select().where(User.email == email).exists()
+        return User.select().where(fn.lower(User.email) == email.lower()).exists()
 
     def there_are_users(self):
         return User.select().exists()
