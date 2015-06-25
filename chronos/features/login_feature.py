@@ -1,6 +1,7 @@
 from uuid import uuid4
 import bcrypt
 
+from peewee import fn
 from chronos.data.entities import User, Session
 
 
@@ -26,7 +27,7 @@ class LoginFeature(object):
         return None
 
     def validate_credentials(self, email, password):
-        user = User.select().where(User.email == email).first()
+        user = User.select().where(fn.lower(User.email) == email.lower()).first()
         if not user:
             raise self.UserDoesNotExist
         if not self.password_match(user, password):

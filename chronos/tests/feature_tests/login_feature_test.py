@@ -49,3 +49,8 @@ class LoginFeatureTest(Test):
         self.feature.logout(token)
         self.assertFalse(self.feature.is_logged(token))
         self.assertIsNone(self.feature.get_current_user(token))
+
+    def test_can_login_with_case_changed_email(self):
+        self.register_example_user()
+        token = self.feature.login('FOO@bar.com', '123456')
+        self.assertTrue(self.feature.is_logged(token))
