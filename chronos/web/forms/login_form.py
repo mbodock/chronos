@@ -20,8 +20,8 @@ class LoginForm(Form):
 
     def validate_credentials(self):
         feature = LoginFeature()
-        email=self.data.get('email'),
-        password=self.data.get('password')
+        email = self.data.get('email')
+        password = self.data.get('password')
         try:
             feature.validate_credentials(email, password)
         except (LoginFeature.UserDoesNotExist, LoginFeature.InvalidPassword):
