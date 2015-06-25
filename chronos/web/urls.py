@@ -4,6 +4,7 @@ from .app import app
 from .views.login_view import LoginView
 from .views.register_user_view import RegisterUserView
 from .views.clock_view import ClockView
+from .views.clock_report_view import ClockReportView
 
 
 @app.route('/')
@@ -41,3 +42,7 @@ def post_start_clock():
 @app.route('/clock/stop', methods=['POST'])
 def post_stop_clock():
     return ClockView().stop_clock()
+
+@app.route('/clock/report')
+def get_clock_report():
+    return ClockReportView().get()
