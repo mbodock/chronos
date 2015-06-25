@@ -1,0 +1,15 @@
+.clock {
+    margin-bottom: 2px;
+}
+
+.clock-date {
+    border-bottom: 1px solid #eee;
+    font-size: 1.4em;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.clock-hour {
+    margin-left: 5px;
+    margin-right: 5px;
+}

@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Chronos</title>
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-theme.min.css">
+
+    {% block styles %}
+        <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-theme.min.css">
+    {% endblock %}
+
 </head>
 <body>
 

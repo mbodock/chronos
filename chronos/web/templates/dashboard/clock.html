@@ -23,20 +23,45 @@
     </form>
 
     {% if clocks.exists() %}
-        <hr>
-        <h2>Clocks</h2>
-        <ul class="clocks">
+        <div class="clocks">
+            {% set date = None %}
             {% for clock in clocks %}
-                <li>
-                    {{ clock.start.strftime('%Y-%m-%d %H:%M:%S') }} >
+
+                {% if clock.start.date() != date %}
+                    <div class="clock-date">
+                        {{ clock.start.date().strftime('%Y-%m-%d') }}
+                        {% if clock.start.date() == now.date() %}
+                            <span class="text-muted small" style="margin-left:10px">Today</span>
+                        {% endif %}
+                    </div>
+                {% endif %}
+                {% set date = clock.start.date() %}
+
+                <div class="clock">
                     {% if clock.stop %}
-                        {{ clock.stop.strftime('%H:%M:%S') }}
+                        <i class="glyphicon glyphicon-time text-muted"></i>
                     {% else %}
-                        : :
+                        <i class="glyphicon glyphicon-hourglass"></i>
                     {% endif %}
-                </li>
+                    <span class="clock-hour">{{ clock.start.strftime('%H:%M:%S') }}</span>
+                    <i class="glyphicon glyphicon-arrow-right small text-muted"></i>
+                    <span class="clock-hour">
+                        {% if clock.stop %}
+                            {{ clock.stop.strftime('%H:%M:%S') }}
+                        {% else %}
+                            : :
+                        {% endif %}
+                    </span>
+                </div>
+
             {% endfor %}
-        </ul>
+        </div>
     {% endif %}
+
+{% endblock %}
+{% block styles %}
+
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/clock.css">
 
 {% endblock %}

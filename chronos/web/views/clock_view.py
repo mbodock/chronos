@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import render_template, request, redirect
 from .view import View
 
@@ -10,6 +12,7 @@ class ClockView(View):
         clock_feature = ClockFeature(self.current_user)
         clock_is_open = clock_feature.clock_is_open()
         clocks = clock_feature.get_clocks().limit(20)
+        now = datetime.now()
         return render_template('dashboard/clock.html', **locals())
 
     def start_clock(self):
