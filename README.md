@@ -15,9 +15,3 @@ A python web application to manage employee working hours.
     run/server
 
 **Obs:** All scripts in `run/` assume your working directory is project root.
-
-
-## Pending features
-
-* Clock report (day, week, month)
-* Implement routine
